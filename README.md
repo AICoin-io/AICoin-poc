@@ -1,0 +1,6 @@
+# AICoin
+
+## Abstract
+
+
+## Running locally
