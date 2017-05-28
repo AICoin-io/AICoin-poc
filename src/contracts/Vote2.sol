@@ -14,11 +14,11 @@ contract vote {
     struct Vote {
         address member; // person delegated to (member)
         uint vote;   // index of the voted proposal
-        uint ballotIndex; 
+        uint groupId; 
     }
 
     struct Proposal {
-        uint ballotIndex;
+        uint groupId;
         bytes32 name;
         uint voteCount;
         uint256 start;
@@ -27,10 +27,9 @@ contract vote {
 
     struct Ballot {
         //mapping(uint => Proposal) proposals; // random access by question key and answer key
-        //Proposal[] proposals;
+        Proposal[] proposals;
         uint256 start;
         uint256 end;
-        bytes32[] proposals;
     }
 
     //Members
@@ -45,25 +44,24 @@ contract vote {
     Ballot[] public ballots;
 
     /// Create a new ballot to choose one of `proposalNames`.
-    function addBallot(bytes32[] proposalNames, uint256 _start, uint256 _end) 
-    {
+    function AddBallot(uint groupId, bytes32[] proposalNames, uint256 _start, uint256 _end) {
         //Only contract owner can excute
-        if (msg.sender == owner) 
-        {
+        if (msg.sender == owner) {
 
-            // Proposal[5] memory proposals;
+            Proposal[] proposals;
 
-            // for (uint i = 0; i < proposalNames.length; i++) {
-            //     proposals.push(Proposal({
-            //         groupId: groupId,
-            //         name: proposalNames[i],
-            //         voteCount: 0,
-            //         start: _start,
-            //         end: _end
-            //     }));
-            // }
+            for (uint i = 0; i < proposalNames.length; i++) {
+                proposals.push(Proposal({
+                    groupId: groupId,
+                    name: proposalNames[i],
+                    voteCount: 0,
+                    start: start,
+                    end: end
+                }));
+            }
 
-            ballots.push(Ballot(_start, _end, proposalNames));
+            Ballot ballot (_start, _end);
+            ballots.push(option);
 
             // // For each of the provided proposal names,
             // // create a new proposal object and add it
@@ -84,10 +82,10 @@ contract vote {
     function vote(uint ballotIndex, uint proposalIndex) 
     {
         //Check to see if member is registered
-        // if (members[msg.sender] != address(0x0))
-        // {
-            // if (ballots[ballotIndex].length != 0)
-            // {
+        if (member[msg.sender].length != 0])
+        {
+            if (ballots[ballotIndex].length != 0)
+            {
                 Ballot ballot = ballots[ballotIndex];
 
                 if (ballot.start > now && ballot.end < now)
@@ -95,16 +93,16 @@ contract vote {
                     Member sender = members[msg.sender];
 
                     //need to assert not voted.
-                    //require(!sender.voted);
+                    require(!sender.voted);
 
-                    //sender.voted = true;
-                    //sender.vote = proposalIndex;
-                    //sender.groupId = ballotIndex;
+                    sender.voted = true;
+                    sender.vote = proposal;
+                    sender.groupId = groupId;
                     
-                    //ballot.proposals[proposalIndex].voteCount += sender.weight;
+                    ballot.proposals[proposalIndex].voteCount += sender.weight;
                 }
-            //}
-        //}
+            }
+        }
     }
 
     function addWeight(address delegate, uint weight)
@@ -116,22 +114,20 @@ contract vote {
         }
     } 
 
-    function removeWeight(uint weight)
+    function removeWeight()
     {
         //Only contract owner can excute
         if (msg.sender == owner) {
-            Member member = members[msg.sender];
+            Voter member = voters[msg.sender];
             member.weight -= weight;
         }
     }
 
-    function addMembers(address member, uint weight) 
-    {
+    function addMembers(address member, uint weight) {
         //Check to see if not nulll
     }
 
-    function removeMember(address member) 
-    {
+    function removeMember(address member) {
 
     }
 }
