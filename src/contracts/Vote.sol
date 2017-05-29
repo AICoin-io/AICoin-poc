@@ -13,7 +13,7 @@ contract vote {
     //Vote
     struct Vote {
         address member; // person delegated to (member)
-        uint vote;   // index of the voted proposal
+        uint voteIndex;   // index of the voted proposal
         uint ballotIndex; 
     }
 
@@ -43,6 +43,7 @@ contract vote {
     //Proposal[] public proposals;
 
     Ballot[] public ballots;
+
 
     /// Create a new ballot to choose one of `proposalNames`.
     function addBallot(bytes32[] proposalNames, uint256 _start, uint256 _end) 
@@ -81,7 +82,7 @@ contract vote {
     }
     
     //vote on the proposal index
-    function vote(uint ballotIndex, uint proposalIndex) 
+    function submitVote(uint ballotIndex)  //, uint proposalIndex
     {
         //Check to see if member is registered
         // if (members[msg.sender] != address(0x0))
@@ -125,13 +126,16 @@ contract vote {
         }
     }
 
-    function addMembers(address member, uint weight) 
+    function addMember(address publicKey, uint weight) 
     {
-        //Check to see if not nulll
+        //Check to see if not null
+        if (msg.sender == owner) {
+            members[publicKey] = Member(publicKey, weight);
+        }
     }
 
-    function removeMember(address member) 
-    {
+    // function removeMember(address publicKey) 
+    // {
 
-    }
+    // }
 }
