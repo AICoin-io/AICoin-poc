@@ -93,8 +93,10 @@ contract vote {
 
                 if (ballot.start > now && ballot.end < now)
                 {
-                    Member sender = members[msg.sender];
-
+                    
+                    Member member = members[msg.sender];
+                    ballot.vote += member.weight;
+                    
                     //need to assert not voted.
                     //require(!sender.voted);
 
