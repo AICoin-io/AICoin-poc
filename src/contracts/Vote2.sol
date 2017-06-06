@@ -125,6 +125,7 @@ contract vote {
 
     function addMembers(address member, uint weight) {
         //Check to see if not nulll
+
     }
 
     function removeMember(address member) {
