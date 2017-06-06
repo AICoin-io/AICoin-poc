@@ -24,6 +24,11 @@ contract SingleVote {
     //Proposal options
     Proposal[] public proposals;
 
+    function SingleVote()
+    {
+        owner = msg.sender;
+    }
+
     /// Create a new ballot to choose one of `proposalNames`.
     function AddBallot(bytes32[] proposalNames, uint256 _start, uint256 _end) {
         //Only contract owner can excute
@@ -58,16 +63,16 @@ contract SingleVote {
     {
         //Only contract owner can excute
         if (msg.sender == owner) {
-            Member member = members[msg.sender];
+            Member member = members[delegate];
             member.weight += weight;
         }
     } 
 
-    function removeWeight(uint weight)
+    function removeWeight(address delegate, uint weight)
     {
         //Only contract owner can excute
         if (msg.sender == owner) {
-            Member member = members[msg.sender];
+            Member member = members[delegate];
             member.weight -= weight;
         }
     }
