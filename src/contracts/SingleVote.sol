@@ -1,6 +1,6 @@
 pragma solidity ^0.4.8;
 
-contract vote {
+contract SingleVote {
 
     address public owner;
 
@@ -8,13 +8,8 @@ contract vote {
     struct Member {
         address member;
         uint weight;
-    }
-
-    //Vote
-    struct Vote {
-        address member; // person delegated to (member)
-        uint vote;   // index of the voted proposal
-        uint groupId; 
+        bool voted;
+        uint proposalIndex;
     }
 
     struct Proposal {
