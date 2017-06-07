@@ -58,7 +58,8 @@ contract SingleVote {
     // Create a new ballot to choose one of `proposalNames`.
     function AddBallot(bytes32[] proposalNames, uint256 _start, uint256 _end) {
         //Only contract owner can excute
-        if (msg.sender == owner) {
+        //if (msg.sender == owner) {
+            require(msg.sender == owner);
             for (uint i = 0; i < proposalNames.length; i++) {
                 proposals.push(Proposal({
                     name: proposalNames[i],
@@ -67,7 +68,7 @@ contract SingleVote {
                     voteCount: 0
                 }));
             }
-        }
+        //}
     }
     
     //vote on the proposal index
