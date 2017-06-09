@@ -14,8 +14,6 @@ contract SingleVote {
 
         balances[msg.sender] = totalSupply;
 
-        //require(msg.sender == owner);
-
         for (uint i = 0; i < proposalNames.length; i++) {
             proposals.push(Proposal({
                 name: proposalNames[i],
@@ -49,7 +47,6 @@ contract SingleVote {
 
     event Transfer(address indexed _from, address indexed _to, uint256 _value);
 
-    //voting
     struct Proposal {
         bytes32 name;
         uint256 start;
@@ -61,17 +58,15 @@ contract SingleVote {
     //Not used
     function AddBallot(bytes32[] proposalNames, uint256 _start, uint256 _end) {
         //Only contract owner can excute
-        //if (msg.sender == owner) {
-            require(msg.sender == owner);
-            for (uint i = 0; i < proposalNames.length; i++) {
-                proposals.push(Proposal({
-                    name: proposalNames[i],
-                    start: _start,
-                    end: _end,
-                    voteCount: 0
-                }));
-            }
-        //}
+        require(msg.sender == owner);
+        for (uint i = 0; i < proposalNames.length; i++) {
+            proposals.push(Proposal({
+                name: proposalNames[i],
+                start: _start,
+                end: _end,
+                voteCount: 0
+            }));
+        }
     }
     
     //vote on the proposal index
