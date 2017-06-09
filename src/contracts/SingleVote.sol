@@ -1,4 +1,4 @@
-pragma solidity ^0.4.8;
+pragma solidity ^0.4.11;
 
 contract SingleVote {
 
@@ -7,12 +7,23 @@ contract SingleVote {
     string public standard = '';
     string public name = 'AI Coin';
 
-    function SingleVote()
+    function SingleVote(bytes32[] proposalNames, uint256 _start, uint256 _end)
     {
         owner = msg.sender;
         totalSupply = 100000;
 
         balances[msg.sender] = totalSupply;
+
+        //require(msg.sender == owner);
+
+        for (uint i = 0; i < proposalNames.length; i++) {
+            proposals.push(Proposal({
+                name: proposalNames[i],
+                start: _start,
+                end: _end,
+                voteCount: 0
+            }));
+        }
     }
 
     function transfer(address _to, uint256 _value) returns (bool success) {
@@ -30,15 +41,6 @@ contract SingleVote {
         }
     }
 
-    // function transferFrom(address _from, address _to, uint256 _value) returns (bool success) {
-    //     if (balances[_from] >= _value && _value > 0) {
-    //         balances[_to] += _value;
-    //         balances[_from] -= _value;
-    //         Transfer(_from, _to, _value);
-    //         return true;
-    //     } else { return false; }
-    // }
-
     function balanceOf(address _owner) constant returns (uint256 balance) {
         return balances[_owner];
     }
@@ -55,7 +57,8 @@ contract SingleVote {
         uint256 voteCount;
     }
 
-    // Create a new ballot to choose one of `proposalNames`.
+    //Create a new ballot to choose one of `proposalNames`.
+    //Not used
     function AddBallot(bytes32[] proposalNames, uint256 _start, uint256 _end) {
         //Only contract owner can excute
         //if (msg.sender == owner) {
@@ -74,7 +77,6 @@ contract SingleVote {
     //vote on the proposal index
     function Vote(uint proposalIndex) 
     {
-
         bool alreadyVoted = voted[msg.sender];
         if (alreadyVoted == false) {
 
@@ -85,8 +87,7 @@ contract SingleVote {
         }
     }
 
-    //Members
-    //mapping(address=>Member) public members;
+    //Votes
     mapping (address => bool) public voted;
 
     //Proposal options
