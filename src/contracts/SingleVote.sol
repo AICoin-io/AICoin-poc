@@ -7,8 +7,7 @@ contract SingleVote {
     string public standard = '';
     string public name = 'AI Coin';
 
-    function SingleVote(bytes32[] proposalNames, uint256 _start, uint256 _end)
-    {
+    function SingleVote(bytes32[] proposalNames, uint256 _start, uint256 _end) {
         owner = msg.sender;
         totalSupply = 100000;
 
@@ -70,8 +69,7 @@ contract SingleVote {
     }
     
     //vote on the proposal index
-    function Vote(uint proposalIndex) 
-    {
+    function Vote(uint proposalIndex) {
         bool alreadyVoted = voted[msg.sender];
         if (alreadyVoted == false) {
 
@@ -80,6 +78,23 @@ contract SingleVote {
             uint256 weight = balanceOf(msg.sender);
             proposal.voteCount += weight;
         }
+    }
+
+    function isVotingAllowed(uint proposalIndex) constant returns (bool allowed) {
+        Proposal proposal = proposals[proposalIndex];
+        if (proposal.start > now && proposal.end < now) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    function isAnyVotingAllowed() constant returns (bool allowed) {
+        for (uint i = 0; i < proposalNames.length; i++) {
+            
+        }
+        return true;
     }
 
     //Votes
