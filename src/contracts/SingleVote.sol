@@ -4,7 +4,7 @@ contract SingleVote {
 
     uint256 public totalSupply;
     address public owner;
-    string public standard = '';
+    string public symbol = '';
     string public name = 'AI Coin';
 
     function SingleVote(bytes32[] proposalNames, uint256 _start, uint256 _end) {
@@ -54,7 +54,6 @@ contract SingleVote {
     }
 
     //Create a new ballot to choose one of `proposalNames`.
-    //Not used
     function AddBallot(bytes32[] proposalNames, uint256 _start, uint256 _end) {
         //Only contract owner can excute
         require(msg.sender == owner);
