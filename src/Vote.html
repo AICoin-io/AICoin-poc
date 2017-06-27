@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>AICoin Admin: Create Ballot</title>
+
+<script type="text/javascript">
+function doVote() {
+	var msg = "VOTE! \n\n";
+	msg += "Name: " + document.getElementById("ballot_name").innerHTML + "\n";
+	var e = document.getElementById("ballot_option");
+	msg += "Selection: " + e.options[e.selectedIndex].text + "\n";
+	msg += "AICoin address: " + document.getElementById("aicoin_address").value + "\n";
+	msg += "Private Key: " + document.getElementById("aicoin_key").value + "\n";
+	alert(msg);
+}
+</script>
+
+<style>
+#form_panel {
+	box-shadow: inset 0 0 10px;
+	padding: 15px;
+}
+#ballot_name {
+	font-family: sans-serif;
+	font-style: italic;
+}
+</style>
+
+</head>
+
+<body>
+	<div id="form_panel">
+		<h1>Ballot Voting Form</h1>
+		<form id="create_ballot" name="create_ballot" method="post" action="#">
+			<table>
+				<tr>
+					<td><label>Ballot: </label></td>
+					<td><label id="ballot_name" name="ballot_name"></label></td>
+				</tr>
+				<tr>
+					<td><label>Select Option: </label></td>
+					<td><select id="ballot_option" name="ballot_option">
+					</select></td>
+				</tr>
+				<tr>
+					<td><label>Coin Address: </label></td>
+					<td><input type="text" name="vote_key" id="aicoin_address"
+						placeholder="Enter the address of your AICoin holding" size="80" /></td>
+				</tr>
+				<tr>
+					<td><label>Private Key: </label></td>
+					<td><input type="text" name="vote_key" id="aicoin_key"
+						placeholder="ENter your private key to sign the vote" size="80" /></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="button" name="do_create"
+						id="do_create" value="Place Vote" onclick="doVote()" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+
+<script>
+/* default values for testing */
+document.getElementById("ballot_name").innerHTML = "What sort of dog should we buy?";
+
+var x = document.getElementById("ballot_option");
+var o1 = document.createElement("option");
+o1.text = "Alsation";
+x.options.add(o1);
+var o2 = document.createElement("option");
+o2.text = "Pug";
+x.options.add(o2);
+var o3 = document.createElement("option");
+o3.text = "Labradoodle";
+x.options.add(o3);
+
+document.getElementById("aicoin_address").value = "12f7c4c8977a5b9add9d0f3b89be15";
+document.getElementById("aicoin_key").value = "3a1076bf45ab87712ad64ccb3b1021777d8fe266";
+</script>
+
+</html>

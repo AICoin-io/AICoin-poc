@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>AICoin Admin: Create Ballot</title>
+
+<script type="text/javascript">
+function doCreateBallot() {
+	var msg = "CREATE BALLOT! \n\n";
+	msg += "Name: " + document.getElementById("ballot_name").value + "\n";
+	msg += "Options: " + document.getElementById("ballot_options").value + "\n";
+	msg += "Opens: " + document.getElementById("ballot_start").value + "\n";
+	msg += "Closes: " + document.getElementById("ballot_end").value + "\n";
+	msg += "Master Key: " + document.getElementById("master_key").value + "\n";
+	alert(msg);
+}
+</script>
+
+<style>
+#form_panel {
+	box-shadow: inset 0 0 10px;
+	padding: 15px;
+}
+</style>
+
+</head>
+
+<body>
+	<div id="form_panel">
+		<h1>Create Ballot</h1>
+		<form id="create_ballot" name="create_ballot" method="post" action="#">
+			<table>
+				<tr>
+					<td><label>Ballot Name: </label></td>
+					<td><input type="text" name="ballot_name" id="ballot_name"
+						placeholder="What is the vote for?" size="50" /></td>
+				</tr>
+				<tr>
+					<td><label>Options: </label></td>
+					<td><input type="text" name="ballot_options"
+						id="ballot_options"
+						placeholder="Enter a comma-separated list of options" size="50" /></td>
+				</tr>
+				<tr>
+					<td><label>Opening date: </label></td>
+					<td><input type="text" name="ballot_start" id="ballot_start"
+						placeholder="The date/time the ballot opens" size="50" /></td>
+				</tr>
+				<tr>
+					<td><label>Closing date: </label></td>
+					<td><input type="text" name="ballot_end" id="ballot_end"
+						placeholder="The date/time that the ballot closes" size="50" /></td>
+				</tr>
+				<tr>
+					<td><label>Master Key: </label></td>
+					<td><input type="text" name="vote_key" id="master_key"
+						placeholder="Enter the master key to create the ballot" size="80" /></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="button" name="do_create"
+						id="do_create" value="Create Ballot" onclick="doCreateBallot()" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+
+<script>
+/* default values for testing */
+document.getElementById("ballot_name").value = "What sort of dog should we buy?";
+document.getElementById("ballot_options").value = "Alsation;Pug;Labradoodle";
+document.getElementById("ballot_start").value = "2017-08-08";
+document.getElementById("ballot_end").value = "2017-08-12";
+document.getElementById("master_key").value = "3a1076bf45ab87712ad64ccb3b1021777d8fe266";
+
+</script>
+
+</html>
