@@ -4,16 +4,27 @@
 <meta charset="UTF-8">
 <title>AICoin Admin: Create Ballot</title>
 
-<script type="text/javascript">
-function doCreateBallot() {
-	var msg = "CREATE BALLOT! \n\n";
-	msg += "Name: " + document.getElementById("ballot_name").value + "\n";
-	msg += "Options: " + document.getElementById("ballot_options").value + "\n";
-	msg += "Opens: " + document.getElementById("ballot_start").value + "\n";
-	msg += "Closes: " + document.getElementById("ballot_end").value + "\n";
-	msg += "Master Key: " + document.getElementById("master_key").value + "\n";
-	alert(msg);
-}
+<script type="text/javascript" src="web3.js"/>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+<script>
+	function doCreateBallot() {
+		var msg = "CREATE BALLOT! \n\n";
+		msg += "Name: " + document.getElementById("ballot_name").value + "\n";
+		msg += "Options: " + document.getElementById("ballot_options").value + "\n";
+		msg += "Opens: " + document.getElementById("ballot_start").value + "\n";
+		msg += "Closes: " + document.getElementById("ballot_end").value + "\n";
+		msg += "Master Key: " + document.getElementById("master_key").value + "\n";
+
+		var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+
+		var accounts = web3.eth.accounts;
+		console.log(accounts);
+
+		web3.sha3('double(int256)');
+		
+		alert(msg);
+	}
 </script>
 
 <style>
@@ -66,13 +77,12 @@ function doCreateBallot() {
 </body>
 
 <script>
-/* default values for testing */
-document.getElementById("ballot_name").value = "What sort of dog should we buy?";
-document.getElementById("ballot_options").value = "Alsation;Pug;Labradoodle";
-document.getElementById("ballot_start").value = "2017-08-08";
-document.getElementById("ballot_end").value = "2017-08-12";
-document.getElementById("master_key").value = "3a1076bf45ab87712ad64ccb3b1021777d8fe266";
-
+	/* default values for testing */
+	document.getElementById("ballot_name").value = "What sort of dog should we buy?";
+	document.getElementById("ballot_options").value = "Alsation;Pug;Labradoodle";
+	document.getElementById("ballot_start").value = "2017-08-08";
+	document.getElementById("ballot_end").value = "2017-08-12";
+	document.getElementById("master_key").value = "3a1076bf45ab87712ad64ccb3b1021777d8fe266";
 </script>
 
 </html>

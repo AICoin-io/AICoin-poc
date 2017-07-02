@@ -3,24 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <title>AICoin Admin: Create Ballot</title>
-<script src="web3.js"/>
+<!--<script src="web3.js"/>-->
 <script type="text/javascript">
-function doVote() {
-	var msg = "VOTE! \n\n";
-	msg += "Name: " + document.getElementById("ballot_name").innerHTML + "\n";
-	var e = document.getElementById("ballot_option");
-	msg += "Selection: " + e.options[e.selectedIndex].text + "\n";
-	msg += "AICoin address: " + document.getElementById("aicoin_address").value + "\n";
+	function doVote() {
+		var msg = "VOTE! \n\n";
+		msg += "Name: " + document.getElementById("ballot_name").innerHTML + "\n";
+		var e = document.getElementById("ballot_option");
+		msg += "Selection: " + e.options[e.selectedIndex].text + "\n";
+		msg += "AICoin address: " + document.getElementById("aicoin_address").value + "\n";
 
-	var key = document.getElementById("aicoin_key").value;
-	msg += "Private Key: " + document.getElementById("aicoin_key").value + "\n";
+		var key = document.getElementById("aicoin_key").value;
+		msg += "Private Key: " + document.getElementById("aicoin_key").value + "\n";
 
-	var web3 = new Web3(new Web3.providers.HttpProvider("http://60.226.74.183:8545"));
+		// var web3 = new Web3(new Web3.providers.HttpProvider("http://60.226.74.183:8545"));
+		// web.personal.account.unlock(key);
 
-	web.personal.account.unlock(key);
-
-	alert(msg);
-}
+		alert(msg);
+	}
 </script>
 
 <style>
