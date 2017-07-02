@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>AICoin Admin: Create Ballot</title>
-
+<script src="web3.js"/>
 <script type="text/javascript">
 function doVote() {
 	var msg = "VOTE! \n\n";
@@ -11,7 +11,14 @@ function doVote() {
 	var e = document.getElementById("ballot_option");
 	msg += "Selection: " + e.options[e.selectedIndex].text + "\n";
 	msg += "AICoin address: " + document.getElementById("aicoin_address").value + "\n";
+
+	var key = document.getElementById("aicoin_key").value;
 	msg += "Private Key: " + document.getElementById("aicoin_key").value + "\n";
+
+	var web3 = new Web3(new Web3.providers.HttpProvider("http://60.226.74.183:8545"));
+
+	web.personal.account.unlock(key);
+
 	alert(msg);
 }
 </script>
@@ -63,22 +70,22 @@ function doVote() {
 </body>
 
 <script>
-/* default values for testing */
-document.getElementById("ballot_name").innerHTML = "What sort of dog should we buy?";
+	/* default values for testing */
+	document.getElementById("ballot_name").innerHTML = "What sort of dog should we buy?";
 
-var x = document.getElementById("ballot_option");
-var o1 = document.createElement("option");
-o1.text = "Alsation";
-x.options.add(o1);
-var o2 = document.createElement("option");
-o2.text = "Pug";
-x.options.add(o2);
-var o3 = document.createElement("option");
-o3.text = "Labradoodle";
-x.options.add(o3);
+	var x = document.getElementById("ballot_option");
+	var o1 = document.createElement("option");
+	o1.text = "Alsation";
+	x.options.add(o1);
+	var o2 = document.createElement("option");
+	o2.text = "Pug";
+	x.options.add(o2);
+	var o3 = document.createElement("option");
+	o3.text = "Labradoodle";
+	x.options.add(o3);
 
-document.getElementById("aicoin_address").value = "12f7c4c8977a5b9add9d0f3b89be15";
-document.getElementById("aicoin_key").value = "3a1076bf45ab87712ad64ccb3b1021777d8fe266";
+	document.getElementById("aicoin_address").value = "12f7c4c8977a5b9add9d0f3b89be15";
+	document.getElementById("aicoin_key").value = "3a1076bf45ab87712ad64ccb3b1021777d8fe266";
 </script>
 
 </html>
