@@ -5,6 +5,7 @@
 <title>AICoin Admin: Create Ballot</title>
 
 <script type="text/javascript" src="web3.js"/>
+<!--<script type="text/javascript" src="token.js"/>-->
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 
 <script>
@@ -21,8 +22,33 @@
 		var accounts = web3.eth.accounts;
 		console.log(accounts);
 
-		web3.sha3('double(int256)');
-		
+		var gas = 1000000;
+
+		var defaultContractAddress = "0x12f7c4c8977a5b9add9d0f3b89be15";
+		var aiCoinContractAddress = web3.eth.contract([{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"proposals","outputs":[{"name":"name","type":"bytes32"},{"name":"start","type":"uint256"},{"name":"end","type":"uint256"},{"name":"voteCount","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"standard","outputs":[{"name":"","type":"string"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"voted","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"proposalIndex","type":"uint256"}],"name":"Vote","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"proposalNames","type":"bytes32[]"},{"name":"_start","type":"uint256"},{"name":"_end","type":"uint256"}],"name":"AddBallot","outputs":[],"payable":false,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Transfer","type":"event"}])
+			.at(defaultContractAddress);
+
+		var names = ['Dog', 'Cat'];
+
+
+		// 1st July 2017 = 1498867200
+		// 1st August 2017 = 1501545600
+		aiCoinContractAddress.AddBallot.sendTransaction(
+			names, 1498867200, 1501545600,
+			{from: accounts[0],
+				gas: gas
+			},
+			function(err, response)
+			{
+				if (err)
+				{
+					return console.log("Failed to send transaction to geth. Error: " + err);
+				}
+
+				console.log("Call to geth was successful. Response: " + response);
+			}
+		);
+
 		alert(msg);
 	}
 </script>
