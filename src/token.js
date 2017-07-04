@@ -21,7 +21,7 @@ function init(contractAddress)
 
 function addBallot(ballot)
 {
-    console.log('About to log the following safety event to Ethereum: ' + JSON.stringify(ballot.body));
+    console.log('About to log the following to Ethereum: ' + JSON.stringify(ballot.body));
     console.log("message.body.eventType = " + ballot.body.eventType);
 
     if (!message.body.externallyOwnerAccount)

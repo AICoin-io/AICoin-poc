@@ -5,16 +5,19 @@
 <title>AICoin Admin: Create Ballot</title>
 
 <script type="text/javascript" src="web3.js"/>
-<!--<script type="text/javascript" src="token.js"/>-->
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 
 <script>
 	function doCreateBallot() {
+
+		var open = document.getElementById("ballot_start").value;
+		var close = document.getElementById("ballot_start").value;
+
 		var msg = "CREATE BALLOT! \n\n";
 		msg += "Name: " + document.getElementById("ballot_name").value + "\n";
 		msg += "Options: " + document.getElementById("ballot_options").value + "\n";
-		msg += "Opens: " + document.getElementById("ballot_start").value + "\n";
-		msg += "Closes: " + document.getElementById("ballot_end").value + "\n";
+		msg += "Opens: " + open + "\n";
+		msg += "Closes: " + close + "\n";
 		msg += "Master Key: " + document.getElementById("master_key").value + "\n";
 
 		var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
@@ -34,7 +37,7 @@
 		// 1st July 2017 = 1498867200
 		// 1st August 2017 = 1501545600
 		aiCoinContractAddress.AddBallot.sendTransaction(
-			names, 1498867200, 1501545600,
+			names, close, open,
 			{from: accounts[0],
 				gas: gas
 			},
@@ -106,8 +109,8 @@
 	/* default values for testing */
 	document.getElementById("ballot_name").value = "What sort of dog should we buy?";
 	document.getElementById("ballot_options").value = "Alsation;Pug;Labradoodle";
-	document.getElementById("ballot_start").value = "2017-08-08";
-	document.getElementById("ballot_end").value = "2017-08-12";
+	document.getElementById("ballot_start").value = 1498867200; //"2017-08-08";
+	document.getElementById("ballot_end").value = 1501545600; //"2017-08-12";
 	document.getElementById("master_key").value = "3a1076bf45ab87712ad64ccb3b1021777d8fe266";
 </script>
 
