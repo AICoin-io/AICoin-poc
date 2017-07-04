@@ -4,7 +4,7 @@ const Web3 = require('web3');
 //const host = "localhost";
 const host = "60.226.74.183";
 const port = "8545";
-const defaultContractAddress = "0x12f7c4c8977a5b9add9d0f3b89be15";
+const defaultContractAddress = "0x57AA24A3410c8f557451Db8D1EE23c4C8C3dC509";
 const gas = 1000000;
 
 // create an instance of web3 using the HTTP provider.
