@@ -14,3 +14,10 @@ geth --testnet --rpc --rpcaddr "127.0.0.1" --rpccorsdomain "*"
 ### Some testnet keys
 81d0dff8cc5541926174f81216d89be5679c7ffc6945c3795e28787af17b91e0
 0x19a7c401994e0Eebee66eE9e96daF0E7367204eC
+
+## Test geth using CURL
+curl http://localhost:8545 -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'
+
+or 
+
+curl http://60.226.74.183:8545 -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'
